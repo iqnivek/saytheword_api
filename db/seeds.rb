@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+list1 = WordList.new(name: "Jazz musicians")
+list1.words.build(word: "Wes Montgomery")
+list1.words.build(word: "Charlie Parker")
+list1.words.build(word: "Chris Potter")
+list1.words.build(word: "Brad Mehldau")
+
+list1.save!
