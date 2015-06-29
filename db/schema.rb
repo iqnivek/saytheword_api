@@ -11,12 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629013640) do
+ActiveRecord::Schema.define(version: 20150629014859) do
 
   create_table "word_lists", force: :cascade do |t|
     t.text     "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "words", force: :cascade do |t|
+    t.integer  "word_list_id"
+    t.text     "word"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "words", ["word_list_id"], name: "index_words_on_word_list_id"
 
 end
