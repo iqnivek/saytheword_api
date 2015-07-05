@@ -1,5 +1,9 @@
 class WordListSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id,
+             :name,
+             :words
 
-  has_many :words
+  def words
+    object.words.pluck(:word)
+  end
 end
