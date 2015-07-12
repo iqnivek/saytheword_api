@@ -12,5 +12,12 @@ list1.words.build(word: "Wes Montgomery")
 list1.words.build(word: "Charlie Parker")
 list1.words.build(word: "Chris Potter")
 list1.words.build(word: "Brad Mehldau")
-
 list1.save!
+
+word1 = list1.words.where(word: "Brad Mehldau")
+word2 = list1.words.where(word: "Chris Potter")
+
+game1 = Game.new(word_list: list1)
+game1.words << word1
+game1.words << word2
+game1.save!

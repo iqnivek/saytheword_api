@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629014859) do
+ActiveRecord::Schema.define(version: 20150712211518) do
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "word_list_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "games", ["word_list_id"], name: "index_games_on_word_list_id"
+
+  create_table "games_words", id: false, force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "word_id"
+  end
+
+  add_index "games_words", ["game_id"], name: "index_games_words_on_game_id"
+  add_index "games_words", ["word_id"], name: "index_games_words_on_word_id"
 
   create_table "word_lists", force: :cascade do |t|
     t.text     "name"
