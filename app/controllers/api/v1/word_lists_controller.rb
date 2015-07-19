@@ -1,4 +1,7 @@
 class Api::V1::WordListsController < ApplicationController
+  # TODO add this back when auth implemented
+  skip_before_filter :verify_authenticity_token
+
   def show
     list = WordList.find(params[:id])
     render json: list
