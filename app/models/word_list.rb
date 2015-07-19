@@ -1,3 +1,4 @@
 class WordList < ActiveRecord::Base
   has_many :words
+  has_many :games
 end
