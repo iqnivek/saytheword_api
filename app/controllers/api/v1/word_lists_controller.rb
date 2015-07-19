@@ -17,7 +17,7 @@ class Api::V1::WordListsController < ApplicationController
   end
 
   def update
-    list = WordList.find(params[:id])
+    list = WordList.find(word_list_params[:id])
     list.words.destroy  # TODO improve by passing ids in serialization
 
     if list.update(word_list_params)
@@ -30,7 +30,7 @@ class Api::V1::WordListsController < ApplicationController
   private
 
     def word_list_params
-      prs = params.require(:word_list).permit(:name, :words)
+      prs = params.require(:word_list).permit(:id, :name, :words)
       prs[:words] = prs[:words].map { |word| { word: word } }
       prs
     end
