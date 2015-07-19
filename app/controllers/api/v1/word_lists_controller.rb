@@ -1,11 +1,11 @@
 class Api::V1::WordListsController < ApplicationController
+  def show
+    list = WordList.find(params[:id])
+    render json: list
+  end
+
   def create
-    list = WordList.new(name: params[:name])
-
-    word_list_params[:words].each do |word|
-      list.words.build(word: word)
-    end
-
+    list = WordList.new(word_list_params)
     if list.save
       render json: list
     else
@@ -13,14 +13,22 @@ class Api::V1::WordListsController < ApplicationController
     end
   end
 
-  def show
+  def update
     list = WordList.find(params[:id])
-    render json: list
+    list.words.destroy  # TODO improve by passing ids in serialization
+
+    if list.update(word_list_params)
+      render json: list
+    else
+      # TODO
+    end
   end
 
   private
 
     def word_list_params
-      params.require(:word_list).permit(:name, :words)
+      prs = params.require(:word_list).permit(:name, :words)
+      prs[:words] = prs[:words].map { |word| { word: word } }
+      prs
     end
 end
